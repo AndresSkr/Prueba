@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using PruebaP.Models.Response;
 using PruebaP.Models.ViewModels;
 using PruebaP.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace PruebaP.Controllers
 {
@@ -20,7 +21,7 @@ namespace PruebaP.Controllers
         }
         //es para saber que tipo de accion va ser el api, en este caso es HttpGET
         [HttpGet("[action]")]
-        public IEnumerable<ClienteViewModel> Message()
+        public IEnumerable<ClienteViewModel> Listado()
         {
             List<ClienteViewModel> lst = (from d in db.clientes
                                           orderby d.Id descending
@@ -45,7 +46,7 @@ namespace PruebaP.Controllers
 
 
         [HttpGet("[action]/{id}")]
-        public Clientes message(int id)
+        public Clientes Listado(int id)
         {
             var resultado = db.clientes.FirstOrDefault(p => p.Id == id);
 
@@ -74,6 +75,72 @@ namespace PruebaP.Controllers
             return Res;
         }
 
+        [HttpDelete("[action]/{id}")]
+        public MyResponse Delete(int id)
+        {
+            MyResponse Res = new MyResponse();
+            try
+            {
+                var resultado = db.clientes.FirstOrDefault(p => p.Id == id);
+                db.clientes.Remove(resultado);
+                db.SaveChanges();
+                Res.Success=1;
+            }
+            catch (Exception e)
+            {
+                Res.Success = 0;
+                Res.Message = e.Message;
+            }
+            return Res;
+        }
+
+        [HttpPut("[action]/{id}")]
+        public MyResponse Modificar([FromBody] ClienteViewModel ClienteModificar, int id)
+        {
+            MyResponse Res = new MyResponse();
+            try
+            {/*
+                db.Entry(ClienteModificar).State = EntityState.Modified;
+                db.SaveChanges();*/
+                var ClienteExistente = db.clientes.FirstOrDefault(p => p.Id == ClienteModificar.Id);
+
+                if (ClienteExistente != null)
+                {
+
+                    if (id == ClienteModificar.Id)
+                    {
+                        ClienteExistente.NIT = ClienteModificar.NIT;
+                        ClienteExistente.nombre = ClienteModificar.nombre;
+                        ClienteExistente.correo = ClienteModificar.correo;
+
+                        db.SaveChanges();
+                        Res.Success = 1;
+                    }
+                    else
+                    {
+                        Res.Success = 0;
+                        Res.Message = "Error Diferentes Clientes";
+                    }
+
+                }
+                else
+                {
+                    Res.Success = 0;
+                    Res.Message = "Error cliente nulo";
+                }
+               
+            }
+            catch (Exception e)
+            {
+                Res.Success = 0;
+                Res.Message = e.Message;
+            }
+            return Res;
+        }
+
 
     }
+
+
+    
 }
