@@ -14,51 +14,66 @@ namespace PruebaP.Controllers
 {
 
     [Route("api/[controller]")]
-    public class ClienteController : Controller
+    public class ServicioController : Controller
     {
         private Models.MyDBContext db;
-        public ClienteController(Models.MyDBContext context)
+        public ServicioController(Models.MyDBContext context)
         {
             db = context;
         }
         //es para saber que tipo de accion va ser el api, en este caso es HttpGET
         [HttpGet("[action]")]
-        public IEnumerable<ClienteViewModel> Listado()
+        public IEnumerable<ServicioViewModel> Listado()
         {
-            List<ClienteViewModel> lst = (from d in db.clientes
+            List<ServicioViewModel> lst = (from d in db.servicios
                                           orderby d.Id descending
-                                          select new ClienteViewModel
+                                          select new ServicioViewModel
                                           {
                                               Id = d.Id,
-                                              NIT =d.NIT,
-                                              nombre = d.nombre,
-                                              correo = d.correo
+                                              nombreServicio=d.nombreServicio,
+                                              valorxHora=d.valorxHora,
+                                              fk_Cliente=d.fk_Cliente
                                           }).ToList();
             return lst;
         }
 
 
         [HttpGet("[action]/{id}")]
-        public Clientes Listado(int id)
+        public Servicios Listado(int id)
         {
-            var resultado = db.clientes.FirstOrDefault(p => p.Id == id);
+            var resultado = db.servicios.FirstOrDefault(p => p.Id == id);
 
             return resultado;
         }
 
         [HttpPost("[action]")]
-        public MyResponse Add([FromBody] ClienteViewModel ClienteIngresar)
+        public MyResponse Add([FromBody] ServicioViewModel ServicioAgregar)
         {
             MyResponse Res = new MyResponse();
             try
             {
-                Models.Clientes oCliente = new Models.Clientes();
-                oCliente.NIT = ClienteIngresar.NIT;
-                oCliente.nombre = ClienteIngresar.nombre;
-                oCliente.correo = ClienteIngresar.correo;
-                db.clientes.Add(oCliente);
-                db.SaveChanges();
-                Res.Success = 1;
+               
+                
+               if (ServicioAgregar!=null)
+                {
+                    var resultado = db.clientes.FirstOrDefault(p => p.Id == ServicioAgregar.fk_Cliente.Id);
+
+
+                    Models.Servicios oServicio = new Models.Servicios();
+                    oServicio.valorxHora = ServicioAgregar.valorxHora;
+                    oServicio.nombreServicio = ServicioAgregar.nombreServicio;
+                    oServicio.fk_Cliente = resultado;
+
+                    db.servicios.Add(oServicio);
+                    db.SaveChanges();
+                    Res.Success = 1;
+
+                }
+                else
+                {
+                    Res.Message = "Sericio Nulo";
+                }
+               
             }
             catch (Exception e)
             {
@@ -74,10 +89,10 @@ namespace PruebaP.Controllers
             MyResponse Res = new MyResponse();
             try
             {
-                var resultado = db.clientes.FirstOrDefault(p => p.Id == id);
-                db.clientes.Remove(resultado);
+                var resultado = db.servicios.FirstOrDefault(p => p.Id == id);
+                db.servicios.Remove(resultado);
                 db.SaveChanges();
-                Res.Success=1;
+                Res.Success = 1;
             }
             catch (Exception e)
             {
@@ -88,23 +103,22 @@ namespace PruebaP.Controllers
         }
 
         [HttpPut("[action]/{id}")]
-        public MyResponse Modificar([FromBody] ClienteViewModel ClienteModificar, int id)
+        public MyResponse Modificar([FromBody] ServicioViewModel ServicioModificar, int id)
         {
             MyResponse Res = new MyResponse();
             try
             {/*
                 db.Entry(ClienteModificar).State = EntityState.Modified;
                 db.SaveChanges();*/
-                var ClienteExistente = db.clientes.FirstOrDefault(p => p.Id == ClienteModificar.Id);
+                var ServicioExistente = db.servicios.FirstOrDefault(p => p.Id == ServicioModificar.Id);
 
-                if (ClienteExistente != null)
+                if (ServicioExistente != null)
                 {
 
-                    if (id == ClienteModificar.Id)
+                    if (id == ServicioModificar.Id)
                     {
-                        ClienteExistente.NIT = ClienteModificar.NIT;
-                        ClienteExistente.nombre = ClienteModificar.nombre;
-                        ClienteExistente.correo = ClienteModificar.correo;
+                        ServicioExistente.nombreServicio = ServicioModificar.nombreServicio;
+                        ServicioExistente.valorxHora = ServicioModificar.valorxHora;
 
                         db.SaveChanges();
                         Res.Success = 1;
@@ -112,7 +126,7 @@ namespace PruebaP.Controllers
                     else
                     {
                         Res.Success = 0;
-                        Res.Message = "Error Diferentes Clientes";
+                        Res.Message = "Error Diferentes Servicios";
                     }
 
                 }
@@ -121,7 +135,7 @@ namespace PruebaP.Controllers
                     Res.Success = 0;
                     Res.Message = "Error cliente nulo";
                 }
-               
+
             }
             catch (Exception e)
             {
@@ -135,5 +149,5 @@ namespace PruebaP.Controllers
     }
 
 
-    
+
 }
