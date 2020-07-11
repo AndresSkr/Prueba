@@ -1,10 +1,10 @@
 <input type="number" [formControl]="idControl" hidden/>
-<input #nit type="number" [formControl]="NITControl" required />
-<input #name type="text" [formControl]="nameControl" required />
-<input #correo type="email" [formControl]="correoControl" required />
+<input #nit type="number" [formControl]="NITControl" placeholder="NIT del cliente" required />
+<input #name type="text" [formControl]="nameControl" placeholder="nombre del cliente" required />
+<input #correo type="email" [formControl]="correoControl"  placeholder="correo del cliente" required />
 
-<input #BotonEnviar type="button" (click)="SendClient()" value="enviar" />
-<input #BotonEditar type="button" (click)="Editar()" value="Editar" disabled/>
+<input #BotonEnviar type="button" class="btn btn-primary" (click)="SendClient()" value="Enviar" />
+<input #BotonEditar type="button" class="btn btn-secondary" (click)="Editar()" value="Editar" disabled/>
 <table class='table table-striped' aria-labelledby="tableLabel">
   <thead>
     <tr>
@@ -24,9 +24,9 @@
       <th>{{cliente.correo}}</th>
       <th>
 
-        <input type="button" (click)="Edit(cliente)" value="Editar" />
+        <input type="button" class="btn btn-secondary"  (click)="Edit(cliente)" value="Editar" />
 
-        <input type="button" (click)="Delete(cliente)"  value="Eliminar" />
+        <input type="button" class="btn btn-danger" (click)="Delete(cliente)"  value="Eliminar" />
       </th>
     </tr>
   </tbody>

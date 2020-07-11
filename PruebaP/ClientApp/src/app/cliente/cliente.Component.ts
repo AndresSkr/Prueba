@@ -5,7 +5,6 @@ import { Cliente } from '../interfaces';
 import { Observable } from 'rxjs';
 import { FormControl } from '@angular/forms';
 
-
 @Component({
   selector: 'app-cliente',
   templateUrl: './cliente.Component.html',
@@ -41,21 +40,16 @@ export class ClienteComponent {
   }
 
   public Editar() {
-    this.idControl.value;
-    this.NITControl.value;
-    this.nameControl.value;
-    this.correoControl.value;
     this.BotonEditar.nativeElement.disabled = true;
     this.BotonEnviar.nativeElement.disabled = false;
-
     this.clienteServices.Modify(this.idControl.value, this.nameControl.value, this.NITControl.value, this.correoControl.value );
-    this.ActilizarLista()
+    this.ActualizarLista()
     this.limpiar();
   }
 
   public Delete(cliente: Cliente) {
     this.clienteServices.Delete(cliente.id);
-    this.ActilizarLista()
+    this.ActualizarLista()
     this.limpiar();
   }
 
@@ -63,7 +57,7 @@ export class ClienteComponent {
     this.clienteServices.Add(this.NITControl.value, this.nameControl.value, this.correoControl.value);
 
 
-    this.ActilizarLista()
+    this.ActualizarLista()
     this.limpiar();
   }
 
@@ -75,7 +69,7 @@ export class ClienteComponent {
     this.nit.nativeElement.focus();
   }
 
-  public ActilizarLista() {
+  public ActualizarLista() {
     setTimeout(() => {
       this.GetCliente();
 

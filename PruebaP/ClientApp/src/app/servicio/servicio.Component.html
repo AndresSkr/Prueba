@@ -1,0 +1,46 @@
+<div>
+  <input type="number" [formControl]="idControl" hidden />
+  <input #name type="text" [formControl]="nameControl" placeholder="nombre del servicio" required />
+  <input #valor type="number" [formControl]="valoxhoraControl" placeholder="valor por hora" required />
+  <input #CodCliente type="number" [formControl]="ClienteControl" placeholder="identificacion del cliente" required />
+
+  <input #BotonEnviar class="btn btn-primary" type="button" (click)="SendServicio()" value="Enviar" />
+  <input #BotonEditar class="btn btn-secondary" type="button" (click)="Editar()" value="Editar" disabled />
+
+
+</div>
+
+<br />
+<div>
+  <input #buscar type="text" [formControl]="BuscarControl" required />
+  <input #BotonBuscar type="button" (click)="Buscar()" value="Buscar" />
+
+</div>
+
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>Identificacion</th>
+      <th>Nombre del servicio</th>
+      <th>Valor por hora</th>
+      <th>Empresa</th>
+      <th>Correo de la empresa</th>
+      <th>Accion</th>
+    </tr>
+  </thead>
+  <tbody *ngFor="let servicio of listServicios | async">
+    <tr>
+      <th>{{servicio.id}}</th>
+      <th>{{servicio.nombreServicio}}</th>
+      <th>{{servicio.valorxHora}}$$</th>
+      <th>{{servicio.fk_Cliente.nombre}}</th>
+      <th>{{servicio.fk_Cliente.correo}}</th>
+      <th>
+
+        <input type="button" class="btn btn-secondary" (click)="Edit(servicio)" value="Editar" />
+
+        <input type="button" class="btn btn-danger" (click)="Delete(servicio)" value="Eliminar" />
+      </th>
+    </tr>
+  </tbody>
+</table>

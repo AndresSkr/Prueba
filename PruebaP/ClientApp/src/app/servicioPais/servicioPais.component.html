@@ -1,0 +1,31 @@
+
+<input #idServicio type="number" [formControl]="idServicioControl" placeholder="ID del servicio" required />
+<input #idPais type="number" [formControl]="idPaisControl" placeholder="ID del pais" required />
+
+<input #BotonEnviar  class="btn btn-primary" type="button" (click)="SendServicioPais()" value="Enviar" />
+
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>Servicio</th>
+      <th>Valor por hora</th>
+      <th>Pais</th>
+      <th>Empresa</th>
+      <th>Correo de la empresa</th>
+      <th>Accion</th>
+    </tr>
+  </thead>
+  <tbody *ngFor="let servicioPais of listServiciosPais | async">
+    <tr>
+      <th>{{servicioPais.fK_IdServicio.nombreServicio}}</th>
+      <th>{{servicioPais.fK_IdServicio.valorxHora}}$$</th>
+      <th>{{servicioPais.fk_IdPais.nombrePais}}</th>
+      <th>{{servicioPais.fK_IdServicio.fk_Cliente.nombre}}</th>
+      <th>{{servicioPais.fK_IdServicio.fk_Cliente.correo}}</th>
+      <th>
+
+        <input type="button" class="btn btn-danger" (click)="Delete(servicioPais)" value="Eliminar" />
+      </th>
+    </tr>
+  </tbody>
+</table>

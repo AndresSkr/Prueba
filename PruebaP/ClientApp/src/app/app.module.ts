@@ -6,34 +6,38 @@ import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
-import { HomeComponent } from './home/home.component';
-import { CounterComponent } from './counter/counter.component';
-import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { ClienteComponent } from './cliente/cliente.Component';
+import { ServicioComponent } from './servicio/servicio.Component';
+import { ServicioPaisComponent } from './serviciopais/servicioPais.component';
+
 
 
 import { ClienteService } from './service/ClienteService'
+import { ServicioService } from './service/ServicioService'
+import { ServicioPaisService } from './service/ServicioPaisService'
+
 @NgModule({
   declarations: [
     AppComponent,
     NavMenuComponent,
-    HomeComponent,
-    CounterComponent,
-    FetchDataComponent,
-    ClienteComponent
+    ClienteComponent,
+    ServicioComponent,
+    ServicioPaisComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule, ReactiveFormsModule,
     RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'counter', component: CounterComponent },
-      { path: 'fetch-data', component: FetchDataComponent },
+      { path: '', component: ClienteComponent, pathMatch: 'full' },
       { path: 'clientes', component: ClienteComponent },
+      { path: 'servicios', component: ServicioComponent },
+      { path: 'serviciosPais', component: ServicioPaisComponent },
+      
+
     ])
   ],
-  providers: [ClienteService],
+  providers: [ClienteService, ServicioService, ServicioPaisService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

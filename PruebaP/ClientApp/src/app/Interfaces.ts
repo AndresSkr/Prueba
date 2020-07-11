@@ -7,12 +7,17 @@ export interface Cliente {
 export interface Servicio {
   id: number,
   nombreServicio: string,
-  precioxHra: number
-  cliente: Cliente;
+  valorxHora: number
+  fk_Cliente: Cliente;
 }
 export interface Pais {
   id: number,
   nombrePais: string,
+}
+export interface ServicioPais {
+  id: number,
+  fk_IdPais: Pais,
+  fK_IdServicio: Servicio
 }
 export interface MyResponse {
   Success: number,

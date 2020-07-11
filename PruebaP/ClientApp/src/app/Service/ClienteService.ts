@@ -21,18 +21,12 @@ export class ClienteService {
   public GetCliente(): Observable<Cliente[]> {
     return this.http.get<Cliente[]>(this.baseUrl + "api/Cliente/Listado");
   }
+  public Search(id) {
+    this.http.get<Cliente[]>(this.baseUrl + 'api/Cliente/Listado' + id, httpOptions);
+  }
 
   public Add(NIT, name, correo) {
     this.http.post<MyResponse>(this.baseUrl + 'api/Cliente/Add', { 'NIT': NIT, 'nombre': name, 'correo':correo }, httpOptions).
-      subscribe(result => {
-        console.log(result);
-      },
-        error => console.log(error));
-  }
-
-
-  public Search(id) {
-    this.http.post<MyResponse>(this.baseUrl + 'api/Cliente/Listado'+id, httpOptions).
       subscribe(result => {
         console.log(result);
       },
