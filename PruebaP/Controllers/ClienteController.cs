@@ -67,7 +67,6 @@ namespace PruebaP.Controllers
             }
             return Res;
         }
-
         [HttpDelete("[action]/{id}")]
         public MyResponse Delete(int id)
         {

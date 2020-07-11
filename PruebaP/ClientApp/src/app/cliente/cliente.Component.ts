@@ -10,6 +10,7 @@ import { FormControl } from '@angular/forms';
   templateUrl: './cliente.Component.html',
 })
 
+
 export class ClienteComponent {
   public listaClientes: Observable<Cliente[]>;
   idControl = new FormControl('');

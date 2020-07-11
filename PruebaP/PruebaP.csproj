@@ -31,8 +31,10 @@
 
   <ItemGroup>
     <None Remove="ClientApp\src\app\cliente\cliente.Component.ts" />
+    <None Remove="ClientApp\src\app\Home\home.component.ts" />
     <None Remove="ClientApp\src\app\Interfaces.ts" />
     <None Remove="ClientApp\src\app\Service\ClienteService.ts" />
+    <None Remove="ClientApp\src\app\Service\homeService.ts" />
     <None Remove="ClientApp\src\app\Service\ServicioPaisService.ts" />
     <None Remove="ClientApp\src\app\Service\ServicioService.ts" />
     <None Remove="ClientApp\src\app\servicioPais\servicioPais.component.ts" />
@@ -41,8 +43,10 @@
 
   <ItemGroup>
     <TypeScriptCompile Include="ClientApp\src\app\cliente\cliente.Component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\Home\home.Component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\Interfaces.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\Service\ClienteService.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\Service\HomeService.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\Service\ServicioPaisService.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\Service\ServicioService.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\servicioPais\servicioPais.component.ts" />
