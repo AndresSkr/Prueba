@@ -16,6 +16,8 @@ import { ServicioService } from './service/ServicioService'
 import { ServicioPaisService } from './service/ServicioPaisService'
 import { HomeService } from './service/HomeService'
 
+
+import { NgxPaginationModule } from 'ngx-pagination';
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,13 +31,12 @@ import { HomeService } from './service/HomeService'
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule, ReactiveFormsModule,
+    NgxPaginationModule,
     RouterModule.forRoot([
       { path: 'home', component: HomeComponent },
       { path: 'clientes', component: ClienteComponent },
       { path: 'servicios', component: ServicioComponent },
       { path: 'serviciosPais', component: ServicioPaisComponent },
-      
-
     ])
   ],
   providers: [ClienteService,

@@ -17,6 +17,7 @@ export class ServicioComponent {
   valoxhoraControl = new FormControl('');
   ClienteControl = new FormControl('');
   BuscarControl = new FormControl('');
+  pageActual: number = 1;
 
   @ViewChild('buscar') buscar;
   @ViewChild('name') name;

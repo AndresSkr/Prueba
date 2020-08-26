@@ -15,6 +15,7 @@ export class ServicioPaisComponent {
   idPaisControl = new FormControl('');
   idServicioControl = new FormControl('');
   @ViewChild('idPais') idPais;
+  pageActual: number = 1;
 
   constructor(http: HttpClient, @Inject("BASE_URL") baseUrl: string,
     protected servicioPaisServices: ServicioPaisService) {

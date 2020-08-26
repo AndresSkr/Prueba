@@ -10,7 +10,6 @@ import { FormControl } from '@angular/forms';
   templateUrl: './cliente.Component.html',
 })
 
-
 export class ClienteComponent {
   public listaClientes: Observable<Cliente[]>;
   idControl = new FormControl('');
@@ -20,12 +19,14 @@ export class ClienteComponent {
   @ViewChild('nit') nit;
   @ViewChild('BotonEditar') BotonEditar;
   @ViewChild('BotonEnviar') BotonEnviar;
-  
+  pageActual: number = 1;
   
   constructor(http: HttpClient, @Inject("BASE_URL") baseUrl: string,
     protected clienteServices: ClienteService) {
     this.GetCliente();
   }
+
+
 
   public GetCliente() {
     this.listaClientes = this.clienteServices.GetCliente();

@@ -15,7 +15,7 @@
       <th>Accion</th>
     </tr>
   </thead>
-  <tbody *ngFor="let servicioPais of listServiciosPais | async">
+  <tbody *ngFor="let servicioPais of listServiciosPais | async |paginate: {itemsPerPage: 5, currentPage: pageActual }">
     <tr>
       <th>{{servicioPais.fK_IdServicio.nombreServicio}}</th>
       <th>{{servicioPais.fK_IdServicio.valorxHora}}$$</th>
@@ -29,3 +29,4 @@
     </tr>
   </tbody>
 </table>
+<pagination-controls (pageChange)="pageActual =$event"></pagination-controls>

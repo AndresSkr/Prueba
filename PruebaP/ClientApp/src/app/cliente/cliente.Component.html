@@ -15,7 +15,7 @@
       <th>Accion</th>
     </tr>
   </thead>
-  <tbody *ngFor="let cliente of listaClientes | async">
+  <tbody *ngFor="let cliente of listaClientes | async |paginate: {itemsPerPage: 5, currentPage: pageActual } ">
 
     <tr>
       <th>{{cliente.id}}</th>
@@ -31,3 +31,4 @@
     </tr>
   </tbody>
 </table>
+<pagination-controls (pageChange)="pageActual =$event"></pagination-controls>

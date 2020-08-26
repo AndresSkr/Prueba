@@ -28,7 +28,7 @@
       <th>Accion</th>
     </tr>
   </thead>
-  <tbody *ngFor="let servicio of listServicios | async">
+  <tbody *ngFor="let servicio of listServicios | async |paginate: {itemsPerPage: 5, currentPage: pageActual }">
     <tr>
       <th>{{servicio.id}}</th>
       <th>{{servicio.nombreServicio}}</th>
@@ -44,3 +44,4 @@
     </tr>
   </tbody>
 </table>
+<pagination-controls (pageChange)="pageActual =$event"></pagination-controls>
